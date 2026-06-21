@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>雷竞技 · 快速导航</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f7fa;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    a {
+      color: #c03c1e;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    a:hover {
+      color: #8e2b13;
+      text-decoration: underline;
+    }
+
+    /* 深色头图 (hero) */
+    .hero {
+      background: linear-gradient(145deg, #0b1a2a 0%, #1a2f3f 100%);
+      color: #eef2f6;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      border-bottom: 3px solid #c03c1e;
+    }
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 span {
+      color: #f0825a;
+    }
+    .hero p {
+      max-width: 640px;
+      margin: 0.8rem auto 0;
+      font-size: 1.1rem;
+      opacity: 0.88;
+    }
+
+    /* 固定顶部导航 */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: #0b1a2a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 2rem;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+    }
+    .top-nav .logo {
+      font-weight: 500;
+      font-size: 1.2rem;
+      color: #eef2f6;
+      letter-spacing: 0.5px;
+    }
+    .top-nav .logo a {
+      color: #f0825a;
+    }
+    .top-nav .logo a:hover {
+      color: #f7b292;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: #cdd9e6;
+      font-size: 0.95rem;
+      font-weight: 400;
+    }
+    .nav-links a:hover {
+      color: #f7b292;
+      text-decoration: none;
+    }
+
+    /* 主容器 */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* 介绍区 - 两列 */
+    .intro-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .intro-text {
+      flex: 1 1 280px;
+    }
+    .intro-text h2 {
+      font-size: 1.8rem;
+      font-weight: 450;
+      border-left: 5px solid #c03c1e;
+      padding-left: 1rem;
+      margin-bottom: 1rem;
+    }
+    .intro-text p {
+      margin-bottom: 1rem;
+    }
+    .intro-highlight {
+      background: #fff;
+      padding: 1.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      flex: 1 1 260px;
+      align-self: flex-start;
+    }
+    .intro-highlight ul {
+      list-style: none;
+    }
+    .intro-highlight li {
+      margin-bottom: 0.75rem;
+      padding-left: 1.4rem;
+      position: relative;
+    }
+    .intro-highlight li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #c03c1e;
+      font-weight: bold;
+    }
+
+    /* 三个场景模块 (卡片) */
+    .scenes-title {
+      font-size: 1.7rem;
+      font-weight: 450;
+      margin: 2.5rem 0 1.2rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 3rem;
+    }
+    .scene-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem 2rem;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 1px solid #e9edf2;
+    }
+    .scene-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+      border-color: #c03c1e30;
+    }
+    .scene-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.7rem;
+      font-weight: 500;
+      color: #0f2a3b;
+    }
+    .scene-card h3 span {
+      background: #c03c1e;
+      color: white;
+      font-size: 0.75rem;
+      padding: 0.05rem 0.6rem;
+      border-radius: 30px;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+    .scene-card p {
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    /* 说明 / 常见摘要 */
+    .faq-summary {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 2rem 2.2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+      margin-top: 1rem;
+    }
+    .faq-summary h4 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #142b3a;
+    }
+    .faq-summary details {
+      margin-bottom: 0.8rem;
+      border-bottom: 1px solid #eef2f6;
+      padding-bottom: 0.6rem;
+    }
+    .faq-summary summary {
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0.4rem 0;
+      color: #1e3d50;
+    }
+    .faq-summary summary::-webkit-details-marker {
+      color: #c03c1e;
+    }
+    .faq-summary p {
+      margin: 0.5rem 0 0.2rem 0.6rem;
+      font-size: 0.95rem;
+      color: #3e5265;
+    }
+
+    /* 底部 */
+    .footer {
+      background: #0b1a2a;
+      color: #b1c3d4;
+      text-align: center;
+      padding: 2rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    .footer a {
+      color: #f7b292;
+    }
+
+    @media (max-width: 640px) {
+      .top-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.8rem 1rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      .intro-wrap {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 顶部导航 (sticky) -->
+  <header class="top-nav">
+    <div class="logo">
+      <a href="https://cnwebs-raygame.com">雷竞技</a>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#intro">简介</a></li>
+      <li><a href="#scenes">常见场景</a></li>
+      <li><a href="#faq">说明</a></li>
+      <li><a href="https://cnwebs-raygame.com" target="_blank" rel="noopener">雷竞技</a></li>
+    </ul>
+  </header>
+
+  <!-- 深色头图 -->
+  <section class="hero">
+    <h1>认识 <span>雷竞技</span></h1>
+    <p>一个偏向快速定位与信息整合的导航式页面，帮你了解这个平台的核心用途与覆盖场景。</p>
+  </section>
+
+  <!-- 主要内容 -->
+  <main class="container">
+
+    <!-- 介绍区 (两列) 带锚点 id -->
+    <div class="intro-wrap" id="intro">
+      <div class="intro-text">
+        <h2>快速识别 · 网站用途</h2>
+        <p>
+          <a href="https://cnwebs-raygame.com">雷竞技</a> 是一个综合类线上竞技与娱乐服务平台。如果你刚接触这个站点，可以从三个角度去理解它：<strong>游戏多样性、实时对抗、以及多终端兼容</strong>。它并不局限于某一类玩法，而是整合了多种对抗形式与互动机制。
+        </p>
+        <p>
+          很多用户会将它和纯粹的直播或单一竞技平台区分开——在这里，你能找到基于不同规则的竞技项目，以及围绕这些项目展开的实时数据、排行榜和参与方式。整个界面倾向于让玩家快速定位自己感兴趣的领域。
+        </p>
+      </div>
+      <div class="intro-highlight">
+        <ul>
+          <li>覆盖数十种竞技项目与自定义玩法</li>
+          <li>实时对战与模拟对抗并行</li>
+          <li>个人数据统计与全服排名</li>
+          <li>移动端 / PC 端均可流畅使用</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 三个场景模块 -->
+    <h3 class="scenes-title" id="scenes">⚡ 常见使用场景</h3>
+    <div class="scene-grid">
+      <div class="scene-card">
+        <h3>实时对抗 <span>高频</span></h3>
+        <p>适合喜欢即时匹配、快速开局的用户。系统根据个人表现动态分配对手，支持单人和组队两种模式。每局结束后可查看详细复盘与数据曲线。</p>
+      </div>
+      <div class="scene-card">
+        <h3>策略模拟</h3>
+        <p>不依赖手速，更看重预判与阵容搭配。社区里常有玩家分享冷门战术，你可以直接套用或微调。模拟赛采用异步匹配，随时可暂停。</p>
+      </div>
+      <div class="scene-card">
+        <h3>休闲娱乐 · 自定义</h3>
+        <p>不想打排位时，可以创建自定义房间，设置特殊规则（如缩短时间、增加增益）。也可以旁观高手对局，从第一视角学习决策思路。</p>
+      </div>
+    </div>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <div class="faq-summary" id="faq">
+      <h4>📌 常见说明</h4>
+      <details>
+        <summary>这个平台适合新手吗？</summary>
+        <p>多数模式设有新手引导和练习区，匹配系统也会优先和水平接近的对手匹配。初期可以多利用模拟赛熟悉机制。</p>
+      </details>
+      <details>
+        <summary>是否需要下载额外客户端？</summary>
+        <p>大部分功能基于浏览器即可运行，部分特殊模式会提示安装轻量插件。移动端建议使用官方适配的浏览器访问。</p>
+      </details>
+      <details>
+        <summary>数据统计是否公开？</summary>
+        <p>个人战绩默认为公开，但你可以在隐私设置中调整为仅好友可见。全服排行榜每日刷新，前百名会有标识。</p>
+      </details>
+      <details>
+        <summary>遇到问题如何反馈？</summary>
+        <p>页面右下角常驻反馈入口，也可以直接在社区发帖。技术类问题通常会在 24 小时内得到答复。</p>
+      </details>
+      <p style="margin-top: 1.2rem; font-size: 0.9rem; border-left: 3px solid #c03c1e; padding-left: 0.8rem;">
+        若想直接体验，可以前往 <a href="https://cnwebs-raygame.com">雷竞技</a> 并浏览你感兴趣的模块，无需注册即可查看公开资讯与排行榜。
+      </p>
+    </div>
+
+  </main>
+
+  <!-- 底部 -->
+  <footer class="footer">
+    <p>基于真实用途整理 · 内容仅供参考 · <a href="https://cnwebs-raygame.com">雷竞技</a></p>
+    <p style="opacity: 0.7; margin-top: 0.3rem;">导航式介绍页 · 非官方最终版本</p>
+  </footer>
+
+</body>
+</html>
